@@ -21,7 +21,7 @@
 
 This plugin provides access to the device's light sensor. The light sensor 
 detects the environment light lumen.
-这个插件提供了访问设备的光纤传感器的功能。光纤传感器能检测设备所处环境的光照强度。
+这个插件提供了访问设备的光线传感器的功能。光线传感器能检测设备所处环境的光照强度。
 
 ## Installation
 
