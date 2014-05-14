@@ -25,7 +25,7 @@ detects the environment light lumen.
 
 ## Installation
 
-    cordova plugin add https://github.com/gdmec/lightsensor
+    cordova plugin add https://github.com/gdmec/lightsensor.git
 
 ## Supported Platforms
 
