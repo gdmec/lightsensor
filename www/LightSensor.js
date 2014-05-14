@@ -28,12 +28,12 @@ var argscheck = require('cordova/argscheck'),
     timers = {},
     LightSensor = {
         /**
-         * Asynchronously acquires the current heading.
-         * @param {Function} successCallback The function to call when the heading
+         * Asynchronously acquires the current environment light lumen.
+         * @param {Function} successCallback The function to call when the environment light lumen
          * data is available
          * @param {Function} errorCallback The function to call when there is an error
-         * getting the heading data.
-         * @param {LightSensorOptions} options The options for getting the heading data (not used).
+         * getting the environment light lumen data.
+         * @param {LightSensorOptions} options The options for getting the environment light lumen data (not used).
          */
         getCurrentLumen:function(successCallback, errorCallback, options) {
             argscheck.checkArgs('fFO', 'LightSensor.getCurrentLumen', arguments);
@@ -47,17 +47,17 @@ var argscheck = require('cordova/argscheck'),
                 errorCallback(ce);
             };
 
-            // Get heading
+            // Get environment light lumen
             exec(win, fail, "LightSensor", "getLumen", [options]);
         },
 
         /**
-         * Asynchronously acquires the heading repeatedly at a given interval.
-         * @param {Function} successCallback The function to call each time the heading
+         * Asynchronously acquires the environment light lumen repeatedly at a given interval.
+         * @param {Function} successCallback The function to call each time the environment light lumen
          * data is available
          * @param {Function} errorCallback The function to call when there is an error
-         * getting the heading data.
-         * @param {HeadingOptions} options The options for getting the heading data
+         * getting the environment light lumen data.
+         * @param {environment light lumenOptions} options The options for getting the environment light lumen data
          * such as timeout and the frequency of the watch. For iOS, filter parameter
          * specifies to watch via a distance filter rather than time.
          */
@@ -73,7 +73,7 @@ var argscheck = require('cordova/argscheck'),
                 timers[id] = "iOS";
                 LightSensor.getCurrentLumen(successCallback, errorCallback, options);
             } else {
-                // Start watch timer to get headings
+                // Start watch timer to get environment light lumens
                 timers[id] = window.setInterval(function() {
                     LightSensor.getCurrentLumen(successCallback, errorCallback);
                 }, frequency);
@@ -83,8 +83,8 @@ var argscheck = require('cordova/argscheck'),
         },
 
         /**
-         * Clears the specified heading watch.
-         * @param {String} watchId The ID of the watch returned from #watchHeading.
+         * Clears the specified environment light lumen watch.
+         * @param {String} watchId The ID of the watch returned from #watchenvironment light lumen.
          */
         clearWatch:function(id) {
             // Stop javascript timer & remove from timer list

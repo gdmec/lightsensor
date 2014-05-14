@@ -39,7 +39,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 /**
- * This class listens to the compass sensor and stores the latest heading value.
+ * This class listens to the compass sensor and stores the latest lumen value.
  */
 public class LightSensorListener extends CordovaPlugin implements SensorEventListener {
 
@@ -117,7 +117,7 @@ public class LightSensorListener extends CordovaPlugin implements SensorEventLis
                     }
                 }, 2000);
             }
-            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, getCompassHeading()));
+            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, getLightLumen()));
         }
         else if (action.equals("setTimeout")) {
             this.setTimeout(args.getLong(0));
@@ -216,14 +216,14 @@ public class LightSensorListener extends CordovaPlugin implements SensorEventLis
     public void onSensorChanged(SensorEvent event) {
 
         // We only care about the orientation as far as it refers to Magnetic North
-        float heading = event.values[0];
+        float lumen = event.values[0];
 
-        // Save heading
+        // Save lumen
         this.timeStamp = System.currentTimeMillis();
-        this.lumen = heading;
+        this.lumen = lumen;
         this.setStatus(LightSensorListener.RUNNING);
 
-        // If heading hasn't been read for TIMEOUT time, then turn off compass sensor to save power
+        // If lumen hasn't been read for TIMEOUT time, then turn off compass sensor to save power
         if ((this.timeStamp - this.lastAccessTime) > this.TIMEOUT) {
             this.stop();
         }
@@ -239,9 +239,9 @@ public class LightSensorListener extends CordovaPlugin implements SensorEventLis
     }
 
     /**
-     * Get the most recent compass heading.
+     * Get the most recent compass lumen.
      *
-     * @return          heading
+     * @return          lumen
      */
     public float getLumen() {
         this.lastAccessTime = System.currentTimeMillis();
@@ -249,7 +249,7 @@ public class LightSensorListener extends CordovaPlugin implements SensorEventLis
     }
 
     /**
-     * Set the timeout to turn off compass sensor if getHeading() hasn't been called.
+     * Set the timeout to turn off compass sensor if getlumen() hasn't been called.
      *
      * @param timeout       Timeout in msec.
      */
@@ -258,7 +258,7 @@ public class LightSensorListener extends CordovaPlugin implements SensorEventLis
     }
 
     /**
-     * Get the timeout to turn off compass sensor if getHeading() hasn't been called.
+     * Get the timeout to turn off compass sensor if getlumen() hasn't been called.
      *
      * @return timeout in msec
      */
@@ -275,13 +275,12 @@ public class LightSensorListener extends CordovaPlugin implements SensorEventLis
     }
 
     /**
-     * Create the CompassHeading JSON object to be returned to JavaScript
+     * Create the Compasslumen JSON object to be returned to JavaScript
      *
-     * @return a compass heading
+     * @return a compass lumen
      */
-    private JSONObject getCompassHeading() throws JSONException {
+    private JSONObject getLightLumen() throws JSONException {
         JSONObject obj = new JSONObject();
-
         obj.put("value", this.getLumen());
         obj.put("timestamp", this.timeStamp);
 
